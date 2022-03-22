@@ -1,5 +1,5 @@
 '''
-category.py is a Object Relational Mapping to the categories table
+transactions.py is a Object Relational Mapping to the categories table
 
 The ORM will work map SQL rows with the schema
     (rowid,name,description)
@@ -19,14 +19,14 @@ def to_cat_dict_list(cat_tuples):
     ''' convert a list of category tuples into a list of dictionaries'''
     return [to_cat_dict(cat) for cat in cat_tuples]
 
-class Category():
+class Transaction():
     ''' Category represents a table of categories'''
 
     def __init__(self,dbfile):
         con= sqlite3.connect(dbfile)
         cur = con.cursor()
         cur.execute('''CREATE TABLE IF NOT EXISTS categories
-                    (name text, desc text)''')
+                    (item_no int, amount NUMERIC, category text, date text, description text)''')
         con.commit()
         con.close()
         self.dbfile = dbfile
