@@ -25,17 +25,47 @@ class Transaction():
     def __init__(self,dbfile):
         con= sqlite3.connect(dbfile)
         cur = con.cursor()
-        cur.execute('''CREATE TABLE IF NOT EXISTS categories
+        cur.execute('''CREATE TABLE IF NOT EXISTS transactions
                     (item_no int, amount NUMERIC, category text, date text, description text)''')
         con.commit()
         con.close()
         self.dbfile = dbfile
 
+    def select_date(self, date):
+        ''' summarize via date '''
+        con= sqlite3.connect(self.dbfile)
+        cur = con.cursor()
+        cur.execute("SELECT rowid,* from categories WHERE date(date) =", date)
+        tuples = cur.fetchall()
+        con.commit()
+        con.close()
+        return to_cat_dict_list(tuples)
+
+    def select_date(self, month):
+        ''' summarize via a month, no particular year '''
+        con= sqlite3.connect(self.dbfile)
+        cur = con.cursor()
+        cur.execute("SELECT rowid,* from categories WHERE month(date) =", month)
+        tuples = cur.fetchall()
+        con.commit()
+        con.close()
+        return to_cat_dict_list(tuples)
+
+    def select_month(self):
+        ''' summarize via date '''
+        con= sqlite3.connect(self.dbfile)
+        cur = con.cursor()
+        cur.execute("SELECT rowid,* from categories ORDER BY date")
+        tuples = cur.fetchall()
+        con.commit()
+        con.close()
+        return to_cat_dict_list(tuples)
+
     def select_all(self):
         ''' return all of the categories as a list of dicts.'''
         con= sqlite3.connect(self.dbfile)
         cur = con.cursor()
-        cur.execute("SELECT rowid,* from categories")
+        cur.execute("SELECT rowid,* from transactions")
         tuples = cur.fetchall()
         con.commit()
         con.close()
@@ -59,6 +89,20 @@ class Transaction():
         con= sqlite3.connect(self.dbfile)
         cur = con.cursor()
         cur.execute("INSERT INTO categories VALUES(?,?)",(item['name'],item['desc']))
+        con.commit()
+        cur.execute("SELECT last_insert_rowid()")
+        last_rowid = cur.fetchone()
+        con.commit()
+        con.close()
+        return last_rowid[0]
+
+    def add_jf(self, tuple):
+        ''' add a category to the categories table.
+            this returns the rowid of the inserted element
+        '''
+        con= sqlite3.connect(self.dbfile)
+        cur = con.cursor()
+        cur.execute("INSERT INTO transactions VALUES(?, ?, ?, ?, ?)", tuple)
         con.commit()
         cur.execute("SELECT last_insert_rowid()")
         last_rowid = cur.fetchone()

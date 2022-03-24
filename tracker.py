@@ -80,6 +80,14 @@ def process_choice(choice):
         category.update(rowid,cat)
     elif choice=='4':
         print("showing transactions")
+        print(transactions.select_all())
+    elif choice == '5':
+        item_no = input("item no: ")
+        amount = input("amount: ")
+        category = input("category: ")
+        date = input("date YYYY-MM-DD: ")
+        description = input("description: ")
+        print(transactions.add_jf((item_no, amount, category, date, description)))
     else:
         print("choice",choice,"not yet implemented")
 
