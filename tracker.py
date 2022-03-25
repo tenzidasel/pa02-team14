@@ -80,14 +80,14 @@ def process_choice(choice):
         category.update(rowid,cat)
     elif choice=='4':
         print("showing transactions")
-        print(transactions.select_all())
+        print_transactions(transactions.select_all())
     elif choice == '5':
         item_no = input("item no: ")
         amount = input("amount: ")
         category = input("category: ")
         date = input("date YYYY-MM-DD: ")
         description = input("description: ")
-        print(transactions.add_jf((item_no, amount, category, date, description)))
+        print(transactions.add((item_no, amount, category, date, description)))
     else:
         print("choice",choice,"not yet implemented")
 
@@ -111,16 +111,17 @@ def toplevel():
 
 def print_transactions(items):
     ''' print the transactions '''
+    print(items)
     if len(items)==0:
         print('no items to print')
         return
     print('\n')
-    print("%-10s %-10d %-10s %-10d %-30s"%(
-        'item #','amount','category','date','description'))
+    print("%-5s %-10s %-10s %-10s %-10s %-30s"%(
+        'row #', 'item #','amount','category','date','description'))
     print('-'*40)
     for item in items:
         values = tuple(item.values()) 
-        print("%-10s %-10d %-10s %-10d %-30s"%values)
+        print("%-1d %-10d %-10d %-10s %-10s %-30s"%values)
 
 def print_category(cat):
     print("%-3d %-10s %-30s"%(cat['rowid'],cat['name'],cat['desc']))

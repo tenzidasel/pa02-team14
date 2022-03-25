@@ -12,7 +12,7 @@ import sqlite3
 
 def to_cat_dict(cat_tuple):
     ''' cat is a category tuple (rowid, name, desc)'''
-    cat = {'rowid':cat_tuple[0], 'name':cat_tuple[1], 'desc':cat_tuple[2]}
+    cat = {'rowid':cat_tuple[0], 'item_no':cat_tuple[1], 'amount':cat_tuple[2], 'category':cat_tuple[3], 'date':cat_tuple[4], 'description':cat_tuple[5]}
     return cat
 
 def to_cat_dict_list(cat_tuples):
@@ -110,7 +110,7 @@ class Transaction():
             shows amount of each transaction 
         '''
 
-    def add_jf(self, tuple):
+    def add(self, tuple):
         ''' add a category to the categories table.
             this returns the rowid of the inserted element
         '''
