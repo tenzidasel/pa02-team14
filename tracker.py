@@ -91,7 +91,10 @@ def process_choice(choice):
         category = input("category: ")
         date = input("date YYYY-MM-DD: ")
         description = input("description: ")
-        print(transactions.add((item_no, amount, category, date, description)))
+        print(transactions.add_jf((item_no, amount, category, date, description)))
+    #Tenzin 
+    elif choice =='11':
+        toplevel()
     else:
         print("choice", choice, "not yet implemented")
 
