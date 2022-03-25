@@ -88,7 +88,11 @@ def process_choice(choice):
         date = input("date YYYY-MM-DD: ")
         description = input("description: ")
         print(transactions.add_jf((item_no, amount, category, date, description)))
+<<<<<<< HEAD
         print(transactions.add_sb((item_no, amount, category, date, description)))
+=======
+        
+>>>>>>> f1d301c8ec5a283d3cf664ec70fe5fe416025442
     else:
         print("choice",choice,"not yet implemented")
 
