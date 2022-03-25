@@ -57,30 +57,35 @@ menu = '''
 '''
 
 
-
-
 def process_choice(choice):
 
-    if choice=='0':
+    if choice == '0':
         return
-    elif choice=='1':
+    elif choice == '1':
         cats = category.select_all()
         print_categories(cats)
-    elif choice=='2':
+    elif choice == '2':
         name = input("category name: ")
         desc = input("category description: ")
-        cat = {'name':name, 'desc':desc}
+        cat = {'name': name, 'desc': desc}
         category.add(cat)
-    elif choice=='3':
+    elif choice == '3':
         print("modifying category")
         rowid = int(input("rowid: "))
         name = input("new category name: ")
         desc = input("new category description: ")
-        cat = {'name':name, 'desc':desc}
-        category.update(rowid,cat)
-    elif choice=='4':
+        cat = {'name': name, 'desc': desc}
+        category.update(rowid, cat)
+    elif choice == '4':
         print("showing transactions")
         print_transactions(transactions.select_all())
+    # Sampada
+    elif choice == '9':
+        print_transactions(transactions.year_sort)
+     # Sampada
+    elif choice == '10':
+        print_transactions(transactions.sort_category)
+        print(transactions.select_all())
     elif choice == '5':
         item_no = input("item no: ")
         amount = input("amount: ")
@@ -89,7 +94,7 @@ def process_choice(choice):
         description = input("description: ")
         print(transactions.add((item_no, amount, category, date, description)))
     else:
-        print("choice",choice,"not yet implemented")
+        print("choice", choice, "not yet implemented")
 
     choice = input("> ")
     return(choice)
@@ -101,13 +106,14 @@ def toplevel():
     ''' read the command args and process them'''
     print(menu)
     choice = input("> ")
-    while choice !='0' :
+    while choice != '0':
         choice = process_choice(choice)
     print('bye')
 
 #
 # here are some helper functions
 #
+
 
 def print_transactions(items):
     ''' print the transactions '''
@@ -124,16 +130,15 @@ def print_transactions(items):
         print("%-1d %-10d %-10d %-10s %-10s %-30s"%values)
 
 def print_category(cat):
-    print("%-3d %-10s %-30s"%(cat['rowid'],cat['name'],cat['desc']))
+    print("%-3d %-10s %-30s" % (cat['rowid'], cat['name'], cat['desc']))
+
 
 def print_categories(cats):
-    print("%-3s %-10s %-30s"%("id","name","description"))
+    print("%-3s %-10s %-30s" % ("id", "name", "description"))
     print('-'*45)
     for cat in cats:
         print_category(cat)
 
 
 # here is the main call!
-
 toplevel()
-
