@@ -31,6 +31,7 @@ could be replaced with PostgreSQL or Pandas or straight python lists
 
 '''
 
+from tkinter import Toplevel
 from transactions import Transaction
 from category import Category
 import sys
@@ -91,6 +92,14 @@ def process_choice(choice):
     elif choice == '6':
         row_id = input("row id: ")
         transactions.delete(row_id)
+    elif choice == '9':
+        print_transactions(transactions.year_sort)
+     # Sampada
+    elif choice == '10':
+        print_transactions(transactions.sort_category)
+        print(transactions.select_all())
+    elif choice == '11':
+        toplevel()
     else:
         print("choice",choice,"not yet implemented")
 
