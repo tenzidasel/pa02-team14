@@ -92,6 +92,9 @@ def process_choice(choice):
     elif choice == '6':
         row_id = input("row id: ")
         transactions.delete(row_id)
+    elif choice == '8':
+        mo = input("month num: ")
+        transactions.select_date(mo)
     elif choice == '9':
         print_transactions(transactions.year_sort)
      # Sampada
