@@ -78,12 +78,12 @@ def process_choice(choice):
         desc = input("new category description: ")
         cat = {'name':name, 'desc':desc}
         category.update(rowid,cat)
+    #Tenzin 
     elif choice=='4':
         print("showing transactions")
         trans=transactions.select_all()
-        print(trans)
-        print_transactions(trans)
        
+        print_transactions(trans)      
     elif choice == '5':
         item_no = input("item no: ")
         amount = input("amount: ")
@@ -91,6 +91,7 @@ def process_choice(choice):
         date = input("date YYYY-MM-DD: ")
         description = input("description: ")
         print(transactions.add_jf((item_no, amount, category, date, description)))
+    #Tenzin 
     elif choice =='11':
         toplevel()
     else:
