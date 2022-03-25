@@ -88,18 +88,9 @@ def process_choice(choice):
         date = input("date YYYY-MM-DD: ")
         description = input("description: ")
         print(transactions.add_jf((item_no, amount, category, date, description)))
-<<<<<<< HEAD
-
     elif choice == '6':
         row_id = input("row id: ")
         transactions.delete(row_id)
-=======
-<<<<<<< HEAD
-        print(transactions.add_sb((item_no, amount, category, date, description)))
-=======
->>>>>>> c288099834a14a327f7a9a4a07cb7f93bda466f8
-        
->>>>>>> f1d301c8ec5a283d3cf664ec70fe5fe416025442
     else:
         print("choice",choice,"not yet implemented")
 
