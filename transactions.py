@@ -38,7 +38,7 @@ class Transaction():
         ''' summarize via date '''
         con = sqlite3.connect(self.dbfile)
         cur = con.cursor()
-        cur.execute("SELECT rowid,* from categories WHERE date(date) =", date)
+        cur.execute("SELECT rowid,* from transactions WHERE date(date) =", date)
         tuples = cur.fetchall()
         con.commit()
         con.close()
@@ -48,7 +48,7 @@ class Transaction():
         ''' summarize via a month, no particular year '''
         con = sqlite3.connect(self.dbfile)
         cur = con.cursor()
-        cur.execute("SELECT rowid,* from categories WHERE month(date) =", month)
+        cur.execute("SELECT rowid,* from transactions WHERE month(date) =", month)
         tuples = cur.fetchall()
         con.commit()
         con.close()
@@ -58,7 +58,7 @@ class Transaction():
         ''' summarize via date '''
         con = sqlite3.connect(self.dbfile)
         cur = con.cursor()
-        cur.execute("SELECT rowid,* from categories ORDER BY date")
+        cur.execute("SELECT rowid,* from transactions ORDER BY date")
         tuples = cur.fetchall()
         con.commit()
         con.close()
@@ -78,10 +78,12 @@ class Transaction():
         ''' return a category with a specified rowid '''
         con = sqlite3.connect(self.dbfile)
         cur = con.cursor()
-        cur.execute("SELECT rowid,* from categories where rowid=(?)", (rowid,))
+        print(rowid)
+        cur.execute("SELECT rowid,* from transactions where rowid=" + str(rowid))
         tuples = cur.fetchall()
         con.commit()
         con.close()
+        print(tuples)
         return to_cat_dict(tuples[0])
 
     # Sanjna
