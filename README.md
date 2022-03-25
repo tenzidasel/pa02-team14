@@ -142,3 +142,12 @@ transactions.py:1:0: R0801: Similar lines in 2 files
 
 -----------------------------------
 Your code has been rated at 6.44/10
+
+
+
+
+=========================== short test summary info ===========================
+FAILED test_transaction.py::test_add - TypeError: tuple indices must be integ...
+FAILED test_transaction.py::test_delete - sqlite3.ProgrammingError: Binding 1...
+ERROR test_transaction.py::test_select_all
+==================== 2 failed, 7 passed, 1 error in 1.34s =====================
