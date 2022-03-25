@@ -156,7 +156,7 @@ class Transaction():
     def year_sort(self):
         con = sqlite3.connect(self.dbfile)
         cur = con.cursor()
-        cur.execute("SELECT * FROM transaction ORDER BY substring(date,0:4)")
+        cur.execute("SELECT rowid, * FROM transactions ORDER BY substring(date,0, 4)")
         tuples = cur.fetchall()
         con.commit()
         con.close()
@@ -166,7 +166,7 @@ class Transaction():
     def sort_category(self):
         con = sqlite3.connect(self.dbfile)
         cur = con.cursor()
-        cur.execute("SELECT * FROM transaction ORDER BY category")
+        cur.execute("SELECT rowid, * FROM transactions ORDER BY category")
         tuples = cur.fetchall()
         con.commit()
         con.close()

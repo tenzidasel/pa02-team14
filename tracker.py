@@ -81,11 +81,10 @@ def process_choice(choice):
         print_transactions(transactions.select_all())
     # Sampada
     elif choice == '9':
-        print_transactions(transactions.year_sort)
+        print_transactions(transactions.year_sort())
      # Sampada
     elif choice == '10':
-        print_transactions(transactions.sort_category)
-        print(transactions.select_all())
+        print_transactions(transactions.sort_category())
     elif choice == '5':
         item_no = input("item no: ")
         amount = input("amount: ")
