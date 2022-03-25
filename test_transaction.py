@@ -31,13 +31,36 @@ def test_add(setup):
     cats1 = setup.select_all()
     assert len(cats1) == len(cats0) + 1
     cat1 = setup.select_one(rowid)
-    print("ta", cat1)
-    assert cat1['item_no']==cat0[0]
-    assert cat1['amount'] == cat0[1]
-    assert cat1['category']==cat0[2]
-    assert cat1['date']==cat0[3]
-    assert cat1['description']==cat0[4]
-    
+    assert cat1['item_no']==cat0['item_no']
+    assert cat1['amount'] == cat0['amount']
+    assert cat1['category']==cat0['category']
+    assert cat1['date']==cat0['date']
+    assert cat1['description']==cat0['description']
+
+
+@pytest.mark.delete
+def test_delete(setup):
+    ''' add a category to db, delete it, and see that the size changes'''
+    # first we get the initial table
+    cats0 = setup.select_all()
+
+    # then we add this category to the table and get the new list of rows
+    cat0 = {'item_no': 125, 
+            'amount': 10,
+            'category': 'testing category',
+            'date': '2022-3-24',
+            'description':'Testing description',
+            }
+    rowid = setup.add(cat0)
+    cats1 = setup.select_all()
+
+    # now we delete the category and again get the new list of rows
+    setup.delete(rowid)
+    cats2 = setup.select_all()
+
+    assert len(cats0)==len(cats2)
+    assert len(cats2) == len(cats1)-1
+
 def test_date(setup):
     tr = setup    
 
