@@ -81,20 +81,34 @@ class Transaction():
         con.close()
         return to_cat_dict(tuples[0])
 
-
-    def add(self,item):
+    #Sanjna
+    def add_sb(self,item):
         ''' add a category to the categories table.
             this returns the rowid of the inserted element
         '''
+        #create global variable 
+        global item_num
+        item_num = 1
         con= sqlite3.connect(self.dbfile)
         cur = con.cursor()
-        cur.execute("INSERT INTO categories VALUES(?,?)",(item['name'],item['desc']))
+
+        #edit parameters 
+        cur.execute("INSERT INTO categories VALUES(?,?,?,?,?)",('item_no', item['amount'],item['category'],
+        item['date'], item['description']))
         con.commit()
         cur.execute("SELECT last_insert_rowid()")
         last_rowid = cur.fetchone()
         con.commit()
         con.close()
+
+        item_num +=1 #increment global variables 
         return last_rowid[0]
+
+    #Sanjna new feature 
+    def show(self, amount):
+        '''
+            shows amount of each transaction 
+        '''
 
     def add_jf(self, tuple):
         ''' add a category to the categories table.
