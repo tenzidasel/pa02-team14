@@ -119,7 +119,6 @@ def toplevel():
 
 def print_transactions(items):
     ''' print the transactions '''
-    print(items)
     if len(items)==0:
         print('no items to print')
         return
